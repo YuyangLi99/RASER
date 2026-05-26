@@ -1,0 +1,15 @@
+# Core dependencies for RASER
+numpy>=1.24
+scikit-learn>=1.3
+openai>=1.0          # for LLM API calls
+sentence-transformers>=2.2  # for nomic encoder
+networkx>=3.0        # for ChainRAG sentence graph
+
+# Boosting library ablation (Table 12 in paper)
+xgboost>=2.0
+lightgbm>=4.0
+catboost>=1.2
+
+# ChainRAG NER (optional; falls back to no-NER if missing)
+spacy>=3.7
+# After installing spacy: python -m spacy download en_core_web_sm

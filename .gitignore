@@ -1,0 +1,31 @@
+# API keys / secrets
+.env
+.hf_token
+*.key
+
+# Local data and trace files (must be regenerated; large)
+# Note: data/holdouts/ IS tracked (holdout QID lists, ~40KB).
+# Only the heavy preprocessed corpora under data/processed/ are ignored.
+data/processed/
+data/raw/
+data/indexes/
+outputs/
+catboost_info/
+*.jsonl
+*.pkl
+*.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Mac
+.DS_Store
