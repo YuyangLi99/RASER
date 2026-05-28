@@ -585,19 +585,3 @@ This is the source of paper Tables 5 and 6.
   saved)
 - Intermediate counterfactual edits, retrieval indexes, etc.
 
----
-
-## 8. Citation
-
-```bibtex
-@inproceedings{raser2026,
-  title  = {RASER: Recoverability-Aware Selective Escalation Router for Multi-Hop Question Answering},
-  author = {Anonymous},
-  year   = {2026},
-  booktitle = {Proceedings of EMNLP 2026 (under review)}
-}
-```
-
-## 9. License
-
-MIT (code) / per-dataset licenses (data).
