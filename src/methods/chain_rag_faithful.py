@@ -12,7 +12,7 @@ Key components added (which our prior chain_rag.py lacked):
   6. AnsInt mode: final answer = aggregate of sub-answers; CxtInt mode: from combined context
 
 What's adapted to our infra:
-  - LLM client = our OpenAI-compatible client (via HAGRID_LLM_BASE_URL)
+  - LLM client = our OpenAI-compatible client (via LLM_BASE_URL)
   - Sentence embeddings = our nomic encoder (was OpenAI text-embedding-3-small in original)
   - Skip FlagReranker neural reranking (use embedding-cosine as proxy); see SKIP_RERANK
   - Use our existing TextRetriever for the initial chunk retrieval pass to scope to relevant docs
@@ -265,7 +265,7 @@ class ChainRAGFaithful:
                  max_words: int = 3000,
                  max_sub_questions: int = 3,
                  api_key: str = None,
-                 model: str = "kit.gpt-oss-120b"):
+                 model: str = "gpt-oss-120b"):
         self.text_retriever = TextRetriever(processed_dir, mode=retriever_mode,
                                             encoder=encoder, encoder_name=encoder_name)
         self.top_k_chunks = top_k_chunks
@@ -275,10 +275,10 @@ class ChainRAGFaithful:
         self.encoder = encoder
         import os as _os
         self.client = OpenAI(
-            api_key=(api_key or _os.environ.get("HAGRID_LLM_API_KEY")
+            api_key=(api_key or _os.environ.get("LLM_API_KEY")
                      or ""),
-            base_url=(_os.environ.get("HAGRID_LLM_BASE_URL")
-                      or "https://ki-toolbox.scc.kit.edu/api/v1"),
+            base_url=(_os.environ.get("LLM_BASE_URL")
+                      or ""),
         )
         self.model = model
         self.total_tokens = 0

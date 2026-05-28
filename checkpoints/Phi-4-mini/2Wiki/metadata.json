@@ -1,0 +1,47 @@
+{
+  "reader": "Phi-4-mini",
+  "dataset": "2Wiki",
+  "n_training_questions": 300,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 32,
+    "bridgeable_rate": 0.10666666666666667
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 5e-05,
+    "training_route_costs": {
+      "STOP": 903.6466666666666,
+      "PRUNE": 2638.3566666666666,
+      "ITER": 3781.1433333333334
+    },
+    "training_route_f1": {
+      "STOP": 0.39124457024457027,
+      "PRUNE": 0.4587932917408203,
+      "ITER": 0.531505439005439
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

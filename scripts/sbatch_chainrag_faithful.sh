@@ -22,7 +22,7 @@
 #
 # Usage (one (reader, dataset) cell at a time):
 #   sbatch --export=DATASET=musique,DATA_DIR=data/processed/musique,\
-#          READER_TAG=gpt,LLM_MODEL=kit.gpt-oss-120b,N=300,\
+#          READER_TAG=gpt,LLM_MODEL=gpt-oss-120b,N=300,\
 #          OUT=outputs/chainrag_faithful/gpt-oss-120b/musique \
 #     scripts/sbatch_chainrag_faithful.sh
 #
@@ -39,7 +39,7 @@ cd "$(dirname "$0")/.."
 DATASET=${DATASET:-musique}
 DATA_DIR=${DATA_DIR:-data/processed/musique_demo}
 READER_TAG=${READER_TAG:-gpt}
-LLM_MODEL=${LLM_MODEL:-kit.gpt-oss-120b}
+LLM_MODEL=${LLM_MODEL:-gpt-oss-120b}
 N=${N:-300}
 OUT=${OUT:-outputs/chainrag_faithful/${READER_TAG}/${DATASET}}
 QFILE=${QFILE:-${DATA_DIR}/holdout_qids.txt}
@@ -49,13 +49,13 @@ mkdir -p "$OUT"
 # Optional: if reader is vLLM-served, discover endpoint URL
 SLUG=$(echo "$LLM_MODEL" | tr '/.: ' '____')
 URL_FILE="outputs/vllm_endpoints/${SLUG}.url"
-if [[ "$LLM_MODEL" != kit.* ]] && [ -f "$URL_FILE" ]; then
+if [[ "$LLM_MODEL" != ""  ]] && [ -f "$URL_FILE" ]; then
   deadline=$(($(date +%s) + 600))
   while [ $(date +%s) -lt $deadline ]; do
     BASE_URL=$(cat "$URL_FILE" 2>/dev/null | tr -d '[:space:]')
     if [ -n "$BASE_URL" ] && curl -fsS --max-time 5 "${BASE_URL}/models" > /dev/null 2>&1; then
-      export HAGRID_LLM_BASE_URL="$BASE_URL"
-      export HAGRID_LLM_API_KEY="dummy"
+      export LLM_BASE_URL="$BASE_URL"
+      export LLM_API_KEY="dummy"
       echo "  endpoint live: $BASE_URL"
       break
     fi

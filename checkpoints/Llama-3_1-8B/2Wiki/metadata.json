@@ -1,0 +1,47 @@
+{
+  "reader": "Llama-3.1-8B",
+  "dataset": "2Wiki",
+  "n_training_questions": 300,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 46,
+    "bridgeable_rate": 0.15333333333333332
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 0.0001,
+    "training_route_costs": {
+      "STOP": 954.3166666666667,
+      "PRUNE": 2911.1666666666665,
+      "ITER": 4046.36
+    },
+    "training_route_f1": {
+      "STOP": 0.30748947185711895,
+      "PRUNE": 0.3870789300425523,
+      "ITER": 0.5324619908355419
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

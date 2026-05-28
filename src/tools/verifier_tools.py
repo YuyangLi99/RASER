@@ -27,9 +27,9 @@ Return valid JSON only:
 class LLMVerifier:
     """Verifies candidate answers against evidence using LLM."""
 
-    def __init__(self, api_key: str = None, base_url: str = None, model: str = "kit.gpt-oss-120b"):
+    def __init__(self, api_key: str = None, base_url: str = None, model: str = "gpt-oss-120b"):
         self.api_key = api_key or ""
-        self.base_url = base_url or "https://ki-toolbox.scc.kit.edu/api/v1"
+        self.base_url = base_url or ""
         self.model = model
         self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
         self.total_tokens_used = 0

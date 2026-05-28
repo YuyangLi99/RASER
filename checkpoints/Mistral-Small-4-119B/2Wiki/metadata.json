@@ -1,0 +1,47 @@
+{
+  "reader": "Mistral-Small-4-119B",
+  "dataset": "2Wiki",
+  "n_training_questions": 300,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 54,
+    "bridgeable_rate": 0.18
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 0.0005,
+    "training_route_costs": {
+      "STOP": 969.7633333333333,
+      "PRUNE": 2858.78,
+      "ITER": 2873.6433333333334
+    },
+    "training_route_f1": {
+      "STOP": 0.4498345913345914,
+      "PRUNE": 0.5698183113183113,
+      "ITER": 0.6581785066785066
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

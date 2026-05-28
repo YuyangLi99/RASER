@@ -1,0 +1,47 @@
+{
+  "reader": "Llama-3-8B",
+  "dataset": "HotpotQA",
+  "n_training_questions": 200,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 13,
+    "bridgeable_rate": 0.065
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 5e-05,
+    "training_route_costs": {
+      "STOP": 1229.2,
+      "PRUNE": 3335.74,
+      "ITER": 4080.695
+    },
+    "training_route_f1": {
+      "STOP": 0.6319738219297042,
+      "PRUNE": 0.6559877402291195,
+      "ITER": 0.6877865092423916
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

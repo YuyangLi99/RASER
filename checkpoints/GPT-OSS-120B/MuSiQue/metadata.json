@@ -1,0 +1,47 @@
+{
+  "reader": "GPT-OSS-120B",
+  "dataset": "MuSiQue",
+  "n_training_questions": 500,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 67,
+    "bridgeable_rate": 0.134
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 5e-05,
+    "training_route_costs": {
+      "STOP": 1522.33,
+      "PRUNE": 4766.784,
+      "ITER": 4278.656
+    },
+    "training_route_f1": {
+      "STOP": 0.4877996050062983,
+      "PRUNE": 0.5275994738227826,
+      "ITER": 0.4546916010682197
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

@@ -28,7 +28,7 @@ class NaiveBM25RAG:
     """
 
     def __init__(self, processed_dir: str, top_k: int = 10,
-                 api_key: str = None, model: str = "kit.gpt-oss-120b",
+                 api_key: str = None, model: str = "gpt-oss-120b",
                  retriever_mode: str = "bm25", encoder_name: str = None, encoder=None):
         self.text_retriever = TextRetriever(processed_dir, mode=retriever_mode,
                                             encoder=encoder, encoder_name=encoder_name)
@@ -36,10 +36,10 @@ class NaiveBM25RAG:
         self.retriever_mode = retriever_mode
         import os as _os
         self.client = OpenAI(
-            api_key=(api_key or _os.environ.get("HAGRID_LLM_API_KEY")
+            api_key=(api_key or _os.environ.get("LLM_API_KEY")
                      or ""),
-            base_url=(_os.environ.get("HAGRID_LLM_BASE_URL")
-                      or "https://ki-toolbox.scc.kit.edu/api/v1"),
+            base_url=(_os.environ.get("LLM_BASE_URL")
+                      or ""),
         )
         self.model = model
         self.total_tokens = 0
@@ -90,7 +90,7 @@ class NaiveGraphTextRAG:
     """
 
     def __init__(self, processed_dir: str, top_k: int = 5,
-                 api_key: str = None, model: str = "kit.gpt-oss-120b",
+                 api_key: str = None, model: str = "gpt-oss-120b",
                  retriever_mode: str = "bm25", encoder_name: str = None, encoder=None):
         self.text_retriever = TextRetriever(processed_dir, mode=retriever_mode,
                                             encoder=encoder, encoder_name=encoder_name)
@@ -100,10 +100,10 @@ class NaiveGraphTextRAG:
         self.retriever_mode = retriever_mode
         import os as _os
         self.client = OpenAI(
-            api_key=(api_key or _os.environ.get("HAGRID_LLM_API_KEY")
+            api_key=(api_key or _os.environ.get("LLM_API_KEY")
                      or ""),
-            base_url=(_os.environ.get("HAGRID_LLM_BASE_URL")
-                      or "https://ki-toolbox.scc.kit.edu/api/v1"),
+            base_url=(_os.environ.get("LLM_BASE_URL")
+                      or ""),
         )
         self.model = model
         self.total_tokens = 0
@@ -179,7 +179,7 @@ class BridgeConditionedRAG:
 
     def __init__(self, processed_dir: str, top_k: int = 10,
                  max_rounds: int = 2, stop_jaccard: float = 0.7,
-                 api_key: str = None, model: str = "kit.gpt-oss-120b",
+                 api_key: str = None, model: str = "gpt-oss-120b",
                  retriever_mode: str = "dense", encoder_name: str = "nomic-v1.5",
                  encoder=None):
         self.text_retriever = TextRetriever(processed_dir, mode=retriever_mode,
@@ -191,10 +191,10 @@ class BridgeConditionedRAG:
         self.encoder_name = encoder_name
         import os as _os
         self.client = OpenAI(
-            api_key=(api_key or _os.environ.get("HAGRID_LLM_API_KEY")
+            api_key=(api_key or _os.environ.get("LLM_API_KEY")
                      or ""),
-            base_url=(_os.environ.get("HAGRID_LLM_BASE_URL")
-                      or "https://ki-toolbox.scc.kit.edu/api/v1"),
+            base_url=(_os.environ.get("LLM_BASE_URL")
+                      or ""),
         )
         self.model = model
         self.total_tokens = 0
@@ -606,8 +606,8 @@ if __name__ == "__main__":
     parser.add_argument("--disable-repair", action="store_true",
                         help="ABV ablation: no local repair step")
     parser.add_argument("--llm-model", default=None,
-                        help="Override LLM model (e.g. kit.qwen3.5-397b-A17b, "
-                             "kit.minimax-m2.5-229b). Default: kit.gpt-oss-120b")
+                        help="Override LLM model (e.g. qwen3.5-397b, "
+                             "minimax-m2.5-229b). Default: gpt-oss-120b")
     parser.add_argument("--base-url", default=None,
                         help="Override OpenAI-compat base URL (e.g. "
                              "http://haicn1704.localdomain:8002/v1 for self-hosted vLLM). "
@@ -621,9 +621,9 @@ if __name__ == "__main__":
     # baselines via env vars (read by every OpenAI(...) call site as fallback).
     import os as _os
     if args.base_url:
-        _os.environ["HAGRID_LLM_BASE_URL"] = args.base_url
+        _os.environ["LLM_BASE_URL"] = args.base_url
     if args.api_key:
-        _os.environ["HAGRID_LLM_API_KEY"] = args.api_key
+        _os.environ["LLM_API_KEY"] = args.api_key
 
     encoder = None
     if args.retriever_mode in ("dense", "hybrid"):

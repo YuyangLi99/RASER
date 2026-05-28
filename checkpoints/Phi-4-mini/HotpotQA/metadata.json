@@ -1,0 +1,47 @@
+{
+  "reader": "Phi-4-mini",
+  "dataset": "HotpotQA",
+  "n_training_questions": 200,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 13,
+    "bridgeable_rate": 0.065
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 5e-05,
+    "training_route_costs": {
+      "STOP": 1204.965,
+      "PRUNE": 3197.46,
+      "ITER": 4699.18
+    },
+    "training_route_f1": {
+      "STOP": 0.6344187528158116,
+      "PRUNE": 0.6425011883541296,
+      "ITER": 0.6700804424333837
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

@@ -1,0 +1,866 @@
+[
+  {
+    "skipped": false,
+    "reader": "GPT-OSS-120B",
+    "dataset": "MuSiQue",
+    "n_training_questions": 500,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 67,
+      "bridgeable_rate": 0.134
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1522.33,
+        "PRUNE": 4766.784,
+        "ITER": 4278.656
+      },
+      "training_route_f1": {
+        "STOP": 0.4877996050062983,
+        "PRUNE": 0.5275994738227826,
+        "ITER": 0.4546916010682197
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "GPT-OSS-120B",
+    "dataset": "2Wiki",
+    "n_training_questions": 500,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 27,
+      "bridgeable_rate": 0.054
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1093.698,
+        "PRUNE": 3325.57,
+        "ITER": 3039.718
+      },
+      "training_route_f1": {
+        "STOP": 0.7544352203352203,
+        "PRUNE": 0.7612288378288379,
+        "ITER": 0.7810669639539205
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "GPT-OSS-120B",
+    "dataset": "HotpotQA",
+    "n_training_questions": 500,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 23,
+      "bridgeable_rate": 0.046
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1384.436,
+        "PRUNE": 3713.946,
+        "ITER": 3574.33
+      },
+      "training_route_f1": {
+        "STOP": 0.7774595377859509,
+        "PRUNE": 0.7691553534487415,
+        "ITER": 0.7631400569617662
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Mistral-Small-4-119B",
+    "dataset": "MuSiQue",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 54,
+      "bridgeable_rate": 0.18
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 0.0001,
+      "training_route_costs": {
+        "STOP": 1220.3166666666666,
+        "PRUNE": 3815.4533333333334,
+        "ITER": 4309.826666666667
+      },
+      "training_route_f1": {
+        "STOP": 0.2829379275379275,
+        "PRUNE": 0.3969265403201449,
+        "ITER": 0.4986538479738277
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Mistral-Small-4-119B",
+    "dataset": "2Wiki",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 54,
+      "bridgeable_rate": 0.18
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 0.0005,
+      "training_route_costs": {
+        "STOP": 969.7633333333333,
+        "PRUNE": 2858.78,
+        "ITER": 2873.6433333333334
+      },
+      "training_route_f1": {
+        "STOP": 0.4498345913345914,
+        "PRUNE": 0.5698183113183113,
+        "ITER": 0.6581785066785066
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Mistral-Small-4-119B",
+    "dataset": "HotpotQA",
+    "n_training_questions": 200,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 17,
+      "bridgeable_rate": 0.085
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1290.14,
+        "PRUNE": 3413.375,
+        "ITER": 3436.86
+      },
+      "training_route_f1": {
+        "STOP": 0.6991893988364576,
+        "PRUNE": 0.7160838932309521,
+        "ITER": 0.7728975975005387
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Gemma-3-31B",
+    "dataset": "MuSiQue",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 59,
+      "bridgeable_rate": 0.19666666666666666
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 0.0001,
+      "training_route_costs": {
+        "STOP": 1204.5433333333333,
+        "PRUNE": 3711.9466666666667,
+        "ITER": 3814.35
+      },
+      "training_route_f1": {
+        "STOP": 0.3930684986037044,
+        "PRUNE": 0.5032549578514306,
+        "ITER": 0.5767530698272809
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Gemma-3-31B",
+    "dataset": "2Wiki",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 27,
+      "bridgeable_rate": 0.09
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 0.0001,
+      "training_route_costs": {
+        "STOP": 961.5966666666667,
+        "PRUNE": 2791.1466666666665,
+        "ITER": 2517.4
+      },
+      "training_route_f1": {
+        "STOP": 0.6295082148243913,
+        "PRUNE": 0.6935195360195361,
+        "ITER": 0.7216540520948318
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Gemma-3-31B",
+    "dataset": "HotpotQA",
+    "n_training_questions": 200,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 6,
+      "bridgeable_rate": 0.03
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1274.005,
+        "PRUNE": 3350.775,
+        "ITER": 3043.2
+      },
+      "training_route_f1": {
+        "STOP": 0.7866973443223444,
+        "PRUNE": 0.7970507834459447,
+        "ITER": 0.8104920727420728
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Llama-3-8B",
+    "dataset": "MuSiQue",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 33,
+      "bridgeable_rate": 0.11
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1163.88,
+        "PRUNE": 3735.9966666666664,
+        "ITER": 4691.55
+      },
+      "training_route_f1": {
+        "STOP": 0.2230436866226508,
+        "PRUNE": 0.2560313829594303,
+        "ITER": 0.35416140945395785
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Llama-3-8B",
+    "dataset": "2Wiki",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 38,
+      "bridgeable_rate": 0.12666666666666668
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 0.0001,
+      "training_route_costs": {
+        "STOP": 931.8166666666667,
+        "PRUNE": 2831.286666666667,
+        "ITER": 3478.3933333333334
+      },
+      "training_route_f1": {
+        "STOP": 0.36651718548515805,
+        "PRUNE": 0.40585118211079724,
+        "ITER": 0.5069556694423567
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Llama-3-8B",
+    "dataset": "HotpotQA",
+    "n_training_questions": 200,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 13,
+      "bridgeable_rate": 0.065
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1229.2,
+        "PRUNE": 3335.74,
+        "ITER": 4080.695
+      },
+      "training_route_f1": {
+        "STOP": 0.6319738219297042,
+        "PRUNE": 0.6559877402291195,
+        "ITER": 0.6877865092423916
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Phi-4-mini",
+    "dataset": "MuSiQue",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 29,
+      "bridgeable_rate": 0.09666666666666666
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1142.5766666666666,
+        "PRUNE": 3566.1766666666667,
+        "ITER": 5381.4766666666665
+      },
+      "training_route_f1": {
+        "STOP": 0.33080366417844914,
+        "PRUNE": 0.3530808488530133,
+        "ITER": 0.37228986870787606
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Phi-4-mini",
+    "dataset": "2Wiki",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 32,
+      "bridgeable_rate": 0.10666666666666667
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 903.6466666666666,
+        "PRUNE": 2638.3566666666666,
+        "ITER": 3781.1433333333334
+      },
+      "training_route_f1": {
+        "STOP": 0.39124457024457027,
+        "PRUNE": 0.4587932917408203,
+        "ITER": 0.531505439005439
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Phi-4-mini",
+    "dataset": "HotpotQA",
+    "n_training_questions": 200,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 13,
+      "bridgeable_rate": 0.065
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1204.965,
+        "PRUNE": 3197.46,
+        "ITER": 4699.18
+      },
+      "training_route_f1": {
+        "STOP": 0.6344187528158116,
+        "PRUNE": 0.6425011883541296,
+        "ITER": 0.6700804424333837
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Llama-3.1-8B",
+    "dataset": "MuSiQue",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 35,
+      "bridgeable_rate": 0.11666666666666667
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1187.9066666666668,
+        "PRUNE": 3820.2166666666667,
+        "ITER": 5129.703333333333
+      },
+      "training_route_f1": {
+        "STOP": 0.2357116496430222,
+        "PRUNE": 0.26445675023152954,
+        "ITER": 0.3759200063472634
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Llama-3.1-8B",
+    "dataset": "2Wiki",
+    "n_training_questions": 300,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 46,
+      "bridgeable_rate": 0.15333333333333332
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 0.0001,
+      "training_route_costs": {
+        "STOP": 954.3166666666667,
+        "PRUNE": 2911.1666666666665,
+        "ITER": 4046.36
+      },
+      "training_route_f1": {
+        "STOP": 0.30748947185711895,
+        "PRUNE": 0.3870789300425523,
+        "ITER": 0.5324619908355419
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  },
+  {
+    "skipped": false,
+    "reader": "Llama-3.1-8B",
+    "dataset": "HotpotQA",
+    "n_training_questions": 200,
+    "feature_names": [
+      "confidence",
+      "ans_len",
+      "bridge_cues",
+      "score_gap",
+      "score_top1",
+      "qtype"
+    ],
+    "qtype_map": {
+      "entity": 0,
+      "date": 1,
+      "yes_no": 2,
+      "count": 3,
+      "other": 4
+    },
+    "raser2": {
+      "threshold_theta": 0.2,
+      "bridgeable_label_tau": 0.1,
+      "n_bridgeable_positives": 16,
+      "bridgeable_rate": 0.08
+    },
+    "raser3": {
+      "cost_budget_fraction": 0.6,
+      "deployed_lambda": 5e-05,
+      "training_route_costs": {
+        "STOP": 1254.63,
+        "PRUNE": 3393.9,
+        "ITER": 4845.53
+      },
+      "training_route_f1": {
+        "STOP": 0.6115494072920543,
+        "PRUNE": 0.6259248723498723,
+        "ITER": 0.6755138358373652
+      }
+    },
+    "gbm_hyperparameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "random_state": 42
+    }
+  }
+]

@@ -114,7 +114,7 @@ class KiRAG:
     """KiRAG: knowledge-triple-driven iterative retrieval."""
 
     def __init__(self, processed_dir: str, top_k: int = 10,
-                 api_key: str = None, model: str = "kit.gpt-oss-120b",
+                 api_key: str = None, model: str = "gpt-oss-120b",
                  retriever_mode: str = "dense", encoder_name: str = "nomic-v1.5",
                  encoder=None, max_iterations: int = 2):
         self.text_retriever = TextRetriever(processed_dir, mode=retriever_mode,
@@ -123,10 +123,10 @@ class KiRAG:
         self.max_iter = max_iterations
         import os as _os
         self.client = OpenAI(
-            api_key=(api_key or _os.environ.get("HAGRID_LLM_API_KEY")
+            api_key=(api_key or _os.environ.get("LLM_API_KEY")
                      or ""),
-            base_url=(_os.environ.get("HAGRID_LLM_BASE_URL")
-                      or "https://ki-toolbox.scc.kit.edu/api/v1"),
+            base_url=(_os.environ.get("LLM_BASE_URL")
+                      or ""),
         )
         self.model = model
         self.total_tokens = 0

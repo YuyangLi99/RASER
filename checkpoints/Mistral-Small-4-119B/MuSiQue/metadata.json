@@ -1,0 +1,47 @@
+{
+  "reader": "Mistral-Small-4-119B",
+  "dataset": "MuSiQue",
+  "n_training_questions": 300,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 54,
+    "bridgeable_rate": 0.18
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 0.0001,
+    "training_route_costs": {
+      "STOP": 1220.3166666666666,
+      "PRUNE": 3815.4533333333334,
+      "ITER": 4309.826666666667
+    },
+    "training_route_f1": {
+      "STOP": 0.2829379275379275,
+      "PRUNE": 0.3969265403201449,
+      "ITER": 0.4986538479738277
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

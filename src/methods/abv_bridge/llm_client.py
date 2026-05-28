@@ -5,8 +5,8 @@ from openai import OpenAI
 from src.tools.llm_utils import call_chat, is_reasoning_model
 
 _DEFAULT_API_KEY = ""
-_DEFAULT_BASE_URL = "https://ki-toolbox.scc.kit.edu/api/v1"
-_DEFAULT_MODEL = "kit.gpt-oss-120b"
+_DEFAULT_BASE_URL = ""
+_DEFAULT_MODEL = "gpt-oss-120b"
 
 
 class LLMClient:
@@ -15,9 +15,9 @@ class LLMClient:
     def __init__(self, api_key: str = None, model: str = None):
         import os as _os
         self.client = OpenAI(
-            api_key=(api_key or _os.environ.get("HAGRID_LLM_API_KEY")
+            api_key=(api_key or _os.environ.get("LLM_API_KEY")
                      or _DEFAULT_API_KEY),
-            base_url=(_os.environ.get("HAGRID_LLM_BASE_URL") or _DEFAULT_BASE_URL),
+            base_url=(_os.environ.get("LLM_BASE_URL") or _DEFAULT_BASE_URL),
         )
         self.model = model or _DEFAULT_MODEL
         self.is_reasoning = is_reasoning_model(self.model)

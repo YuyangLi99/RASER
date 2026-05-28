@@ -1,0 +1,47 @@
+{
+  "reader": "Gemma-3-31B",
+  "dataset": "MuSiQue",
+  "n_training_questions": 300,
+  "feature_names": [
+    "confidence",
+    "ans_len",
+    "bridge_cues",
+    "score_gap",
+    "score_top1",
+    "qtype"
+  ],
+  "qtype_map": {
+    "entity": 0,
+    "date": 1,
+    "yes_no": 2,
+    "count": 3,
+    "other": 4
+  },
+  "raser2": {
+    "threshold_theta": 0.2,
+    "bridgeable_label_tau": 0.1,
+    "n_bridgeable_positives": 59,
+    "bridgeable_rate": 0.19666666666666666
+  },
+  "raser3": {
+    "cost_budget_fraction": 0.6,
+    "deployed_lambda": 0.0001,
+    "training_route_costs": {
+      "STOP": 1204.5433333333333,
+      "PRUNE": 3711.9466666666667,
+      "ITER": 3814.35
+    },
+    "training_route_f1": {
+      "STOP": 0.3930684986037044,
+      "PRUNE": 0.5032549578514306,
+      "ITER": 0.5767530698272809
+    }
+  },
+  "gbm_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "random_state": 42
+  }
+}

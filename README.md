@@ -20,6 +20,123 @@ is shared.
 
 ---
 
+## How RASER works (paper §4)
+
+### RASER-2: two-route classifier
+
+A 2-action RASER chooses between two actions: the cheap **one-shot RAG**
+and the expensive **PRUNE** bridge step. PRUNE tries to find the
+*bridge entity* — the missing intermediate fact that links the
+question's two hops. For example, to answer *"Who is the spouse of
+Young Man Luther's author?"* the router has to identify the bridge
+entity (Erik Erikson, the author of the book), then look up his spouse.
+
+PRUNE itself has four steps: ask the LLM to propose up to two
+candidate bridge entities, re-retrieve using each, drop weak entities
+with a lightweight verifier, and ask the reader for a final answer.
+
+RASER-2 itself has four steps:
+1. Run one-shot RAG to get a draft answer and top-$k$ chunks.
+2. Compute six features from the retrieved scores, the draft answer,
+   and the question text (no extra LLM call).
+3. A GBM (Gradient Boosting Machine) classifier estimates
+   $p(\text{BRIDGEABLE}\mid \mathbf{x})$ — the probability that PRUNE
+   will improve the draft answer.
+4. If $p \ge \theta$ (deployed: $\theta = 0.20$), run PRUNE and
+   return its answer; otherwise return the one-shot draft.
+
+![RASER-2 walkthrough on the Young Man Luther question](docs/raser_workflow_walkthrough.png)
+
+*Figure: full pipeline on a question that PRUNE solves. One-shot RAG
+returns "I don't know"; the features (small score gap, IDK answer,
+entity question) put $p(\textsc{BRIDGEABLE}) = 0.5128 > 0.20$, so
+RASER-2 runs PRUNE; the Bridge Proposer extracts Erik Erikson; the
+Final Synthesizer returns Joan Erikson.*
+
+### RASER-3: three-route cost-aware router
+
+A yes/no classifier can not say *"Route B is better than A, but route
+C is even better."* So with three routes (one-shot RAG, PRUNE,
+IRCoT*), we replace the classifier with **three score regressors**.
+Each regressor looks at the same six features and predicts the F1 a
+specific route would get on this question:
+$\hat{f}_\text{STOP}(\mathbf{x})$,
+$\hat{f}_\text{PRUNE}(\mathbf{x})$,
+$\hat{f}_\text{IRCoT*}(\mathbf{x})$.
+
+Pick the route that maximises predicted F1 minus a cost penalty:
+
+$$ r^{*} = \arg\max_{r}\; \big[\,\hat{f}_r(\mathbf{x}) \;-\; \lambda \cdot \bar{c}_r\,\big] $$
+
+where $\bar{c}_r$ is the average token cost of route $r$ on training
+data and $\lambda$ controls how aggressively the router spends. At
+$\lambda = 0$ the router takes the highest predicted F1 regardless of
+cost; at large $\lambda$ it always stops. The deployed $\lambda$ per
+(LLM, dataset) cell is derived from the **cost-budget rule**: pick the
+largest $\lambda$ such that training-fold average spend stays $\le
+0.60 \times$ always-IRCoT*'s tokens.
+
+![RASER-3 cost-aware decision on the Achaemenid question](docs/raser_workflow_disagreement.png)
+
+*Figure: a case where RASER-2 and RASER-3 disagree. RASER-2's
+$p(\textsc{BRIDGEABLE}) = 0.164 < 0.20$, so it stays with the one-shot
+"I don't know" (F1 $= 0$). RASER-3 predicts $\hat{f}_\text{IRCoT*} =
+0.50$, much higher than the other two; after the cost penalty IRCoT*
+still wins; two retrieve-extract rounds find "323 BC" (F1 $= 1$).*
+
+### Using the trained routers
+
+Per-cell trained checkpoints are in `checkpoints/<LLM>/<dataset>/`.
+Each cell has:
+- `raser2_classifier.pkl` (binary GBM)
+- `raser3_stop.pkl`, `raser3_prune.pkl`, `raser3_iter.pkl` (3 regressors)
+- `metadata.json` (feature names, $\theta$, deployed $\lambda$,
+  training-fold route costs, etc.)
+
+Loading and running RASER-2:
+
+```python
+import pickle, json
+import numpy as np
+
+cell = "checkpoints/Llama-3_1-8B/MuSiQue"
+clf = pickle.load(open(f"{cell}/raser2_classifier.pkl", "rb"))
+meta = json.load(open(f"{cell}/metadata.json"))
+theta = meta["raser2"]["threshold_theta"]      # 0.20
+
+# Six features in order:
+# [confidence, ans_len, bridge_cues, score_gap, score_top1, qtype]
+x = np.array([[0.8, 3, 1.0, 0.059, 0.681, 1]])  # Achaemenid example
+p = clf.predict_proba(x)[0, 1]
+action = "PRUNE" if p >= theta else "ONE-SHOT RAG"
+```
+
+Loading and running RASER-3:
+
+```python
+import pickle, json
+import numpy as np
+
+cell = "checkpoints/Llama-3_1-8B/MuSiQue"
+meta = json.load(open(f"{cell}/metadata.json"))
+lam = meta["raser3"]["deployed_lambda"]            # 5e-05 on this cell
+c   = meta["raser3"]["training_route_costs"]       # {STOP: ~1188, PRUNE: ~3820, ITER: ~5130}
+
+regs = {r: pickle.load(open(f"{cell}/raser3_{r.lower()}.pkl", "rb"))
+        for r in ["stop", "prune", "iter"]}
+f   = {r: regs[r].predict(x)[0] for r in regs}
+score = {r: f[r] - lam * c[{"stop":"STOP","prune":"PRUNE","iter":"ITER"}[r]] for r in regs}
+action = max(score, key=score.get)   # one of {stop, prune, iter}
+```
+
+The 18 cells cover (LLM, dataset) for the six LLMs and three datasets
+reported in the paper. To retrain on a new cell, run
+`src/eval/train_deployment_routers.py` after producing the baseline
+trace files (Step 1 below); see also `checkpoints/INDEX.json` for the
+full list.
+
+---
+
 ## 1. Setup
 
 ```bash
@@ -37,8 +154,8 @@ python -m spacy download en_core_web_sm
 Set these before running anything that calls an LLM:
 
 ```bash
-export HAGRID_LLM_API_KEY="your_api_key"
-export HAGRID_LLM_BASE_URL="https://your-llm-endpoint/v1"
+export LLM_API_KEY="your_api_key"
+export LLM_BASE_URL="https://your-llm-endpoint/v1"
 ```
 
 The code falls back to no key if the variable is unset, which fails at
@@ -116,7 +233,7 @@ python -m src.eval.baselines \
   --baseline naive_bm25 \
   --data-dir data/processed/musique \
   --n 300 \
-  --llm-model kit.llama-3.1-8b \
+  --llm-model llama-3.1-8b \
   --output-dir outputs/sweep_llama31/musique \
   --retriever-mode dense
 
@@ -260,6 +377,7 @@ RASER/
 │   │   ├── three_route_feasibility.py           per-cell trace file paths
 │   │   ├── router_model_ablation.py             R2 + R3 head ablation (Table 12)
 │   │   ├── sensitivity_sweep.py                 θ + cost-budget sweeps (Tables 5/6)
+│   │   ├── train_deployment_routers.py          train per-cell R2 + R3 checkpoints
 │   │   ├── baselines.py                         STOP / PRUNE / IRCoT / Self-Ask runners
 │   │   ├── answer_normalizer.py                 F1, qtype classification
 │   │   └── backfill_dense_scores.py             rebuild dense scores (one-off)
@@ -279,6 +397,17 @@ RASER/
 │       ├── musique_holdout500.txt                500 QIDs (MuSiQue)
 │       ├── 2wiki_holdout500.txt                  500 QIDs (2WikiMultiHopQA)
 │       └── hotpotqa_holdout500.txt               500 QIDs (HotpotQA)
+├── checkpoints/                                 deployment-trained routers
+│   ├── INDEX.json                                summary of all 18 cells
+│   └── <LLM>/<dataset>/                          one folder per (LLM, dataset) cell
+│       ├── raser2_classifier.pkl                   GBM binary classifier (R2)
+│       ├── raser3_stop.pkl                         GBM regressor for STOP (R3)
+│       ├── raser3_prune.pkl                        GBM regressor for PRUNE (R3)
+│       ├── raser3_iter.pkl                         GBM regressor for IRCoT* (R3)
+│       └── metadata.json                           feature names, deployed θ + λ, training stats
+├── docs/                                        figures used in this README
+│   ├── raser_workflow_walkthrough.png            paper Figure 1 (Erik Erikson example)
+│   └── raser_workflow_disagreement.png           paper Figure 3 (Achaemenid example)
 └── results/                                     numerical outputs reported in the paper
     ├── three_route_canonical/summary.json        paper Table 2
     ├── router_model_ablation/summary.json        paper Table 12
