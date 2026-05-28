@@ -5,15 +5,19 @@
 
 # Local data and trace files (must be regenerated; large)
 # Note: data/holdouts/ IS tracked (holdout QID lists, ~40KB).
-# Only the heavy preprocessed corpora under data/processed/ are ignored.
+# Note: checkpoints/*.pkl ARE tracked (deployment-trained routers, ~21 MB).
+# Only the heavy preprocessed corpora under data/processed/ and raw .pkl
+# elsewhere are ignored.
 data/processed/
 data/raw/
 data/indexes/
 outputs/
 catboost_info/
 *.jsonl
-*.pkl
 *.pdf
+# Ignore .pkl by default, but allow tracked checkpoints
+*.pkl
+!checkpoints/**/*.pkl
 
 # Python
 __pycache__/
