@@ -18,6 +18,9 @@ The paper proposes two variants:
 Everything else (features, retriever, reader LLM, 5-fold CV protocol)
 is shared.
 
+**For the numbers**: see [RESULTS.md](RESULTS.md) for paper Tables 2, 5, 6,
+and 12 rendered directly from the JSON summaries in this repo.
+
 ---
 
 ## How RASER works (paper §4)
